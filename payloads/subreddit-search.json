@@ -1,0 +1,9 @@
+{
+  "query": "AI agents",
+  "urls": [
+    "https://www.reddit.com/r/technology/"
+  ],
+  "results_limit": 20,
+  "sort_by": "relevance",
+  "published_within": "all"
+}

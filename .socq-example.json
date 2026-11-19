@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "templateVersion": "2.0.0",
+  "kind": "platform",
+  "platform": "reddit",
+  "endpointCount": 13,
+  "endpoints": [
+    "reddit/posts",
+    "reddit/comments",
+    "reddit/subreddit-posts",
+    "reddit/search",
+    "reddit/subreddit-details",
+    "reddit/subreddit-search",
+    "reddit/user-profile",
+    "reddit/user-posts",
+    "reddit/user-comments",
+    "reddit/user-active-subreddits",
+    "reddit/popular-feed",
+    "reddit/trending-searches",
+    "reddit/subreddit-rules"
+  ],
+  "landingPage": "https://socq.ai/apis/reddit",
+  "docsPage": "https://docs.socq.ai/api-manual/reddit/overview",
+  "generatedFrom": "SocQAPI/socq-example-template"
+}

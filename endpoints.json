@@ -1,0 +1,689 @@
+{
+  "schemaVersion": 1,
+  "platform": "reddit",
+  "platformName": "Reddit",
+  "baseUrl": "https://api.socq.ai",
+  "creditUsd": 0.005,
+  "endpoints": [
+    {
+      "publicId": "reddit/posts",
+      "name": "Reddit Posts API",
+      "description": "Collect public Reddit posts from supported post URLs, returning normalized text, author and community context, media, timestamps, and visible engagement metrics.",
+      "method": "POST",
+      "path": "/v1/reddit/posts",
+      "payload": "payloads/posts.json",
+      "launchedAt": "2026-07-18",
+      "price": "0.5 credits ($0.0025) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.5,
+        "estimateResultCount": 1,
+        "estimateInputField": "urls",
+        "emptyResultPolicy": "base_only"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/reddit/posts",
+      "landingUrl": "https://socq.ai/apis/reddit/posts",
+      "required": [
+        "urls"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "urls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "description": "Public profile or content URLs."
+          }
+        },
+        "required": [
+          "urls"
+        ]
+      }
+    },
+    {
+      "publicId": "reddit/comments",
+      "name": "Reddit Comments API",
+      "description": "Collect public Reddit comments from post URLs, returning text, author and thread context, timestamps, and visible engagement in normalized records.",
+      "method": "POST",
+      "path": "/v1/reddit/comments",
+      "payload": "payloads/comments.json",
+      "launchedAt": "2026-07-18",
+      "price": "0.3 credits ($0.0015) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.3,
+        "estimateResultCount": 100,
+        "estimateResultCountPerInputField": "urls",
+        "emptyResultPolicy": "base_only"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/reddit/comments",
+      "landingUrl": "https://socq.ai/apis/reddit/comments",
+      "required": [
+        "urls"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "urls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "description": "Public profile or content URLs."
+          }
+        },
+        "required": [
+          "urls"
+        ]
+      }
+    },
+    {
+      "publicId": "reddit/subreddit-posts",
+      "name": "Reddit Subreddit Posts API",
+      "description": "Discover public Reddit posts from subreddit URLs with supported sorting, a per-subreddit result limit, and normalized content, community context, timestamps, and visible engagement.",
+      "method": "POST",
+      "path": "/v1/reddit/subreddit-posts",
+      "payload": "payloads/subreddit-posts.json",
+      "launchedAt": "2026-07-18",
+      "price": "0.5 credits ($0.0025) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.5,
+        "estimateResultCount": 100,
+        "estimateResultCountPerInputField": "urls",
+        "emptyResultPolicy": "base_only"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/reddit/subreddit-posts",
+      "landingUrl": "https://socq.ai/apis/reddit/subreddit-posts",
+      "required": [
+        "urls"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "results_limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2000
+          },
+          "sort_by": {
+            "type": "string",
+            "minLength": 1
+          },
+          "urls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "description": "Public profile or content URLs."
+          }
+        },
+        "required": [
+          "urls"
+        ]
+      }
+    },
+    {
+      "publicId": "reddit/search",
+      "name": "Reddit Search API",
+      "description": "Search public Reddit posts by query and publication window, returning normalized titles, text, authors, community context, timestamps, media, and visible engagement.",
+      "method": "POST",
+      "path": "/v1/reddit/search",
+      "payload": "payloads/search.json",
+      "launchedAt": "2026-07-18",
+      "price": "0.6 credits ($0.003) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.6,
+        "estimateResultCount": 100,
+        "emptyResultPolicy": "base_only"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/reddit/search",
+      "landingUrl": "https://socq.ai/apis/reddit/search",
+      "required": [
+        "query"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "published_within": {
+            "type": "string",
+            "minLength": 1
+          },
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Search query."
+          },
+          "results_limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2000
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "publicId": "reddit/subreddit-details",
+      "name": "Reddit Subreddit Details API",
+      "description": "Retrieve metadata for public subreddits by community URL, returning subscriber counts, weekly active users, rules, and community assets.",
+      "method": "POST",
+      "path": "/v1/reddit/subreddit-details",
+      "payload": "payloads/subreddit-details.json",
+      "launchedAt": "2026-09-11",
+      "price": "0.5 credits ($0.0025) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.5,
+        "estimateInputField": "urls",
+        "emptyResultPolicy": "base_only"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/reddit/subreddit-details",
+      "landingUrl": "https://socq.ai/apis/reddit/subreddit-details",
+      "required": [
+        "urls"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "urls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "description": "Public profile or content URLs."
+          }
+        },
+        "required": [
+          "urls"
+        ]
+      }
+    },
+    {
+      "publicId": "reddit/subreddit-search",
+      "name": "Reddit Subreddit Search API",
+      "description": "Search public discussions and posts within one specific subreddit by query, timeframe, and sort order.",
+      "method": "POST",
+      "path": "/v1/reddit/subreddit-search",
+      "payload": "payloads/subreddit-search.json",
+      "launchedAt": "2026-09-11",
+      "price": "0.6 credits ($0.003) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.6,
+        "estimateResultCount": 100,
+        "estimateResultCountPerInputField": "urls",
+        "emptyResultPolicy": "base_only"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/reddit/subreddit-search",
+      "landingUrl": "https://socq.ai/apis/reddit/subreddit-search",
+      "required": [
+        "query",
+        "urls"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "published_within": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "all",
+              "day",
+              "hour",
+              "month",
+              "week",
+              "year"
+            ]
+          },
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Search query."
+          },
+          "results_limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2000,
+            "default": 100
+          },
+          "sort_by": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "comments",
+              "hot",
+              "new",
+              "relevance",
+              "top"
+            ]
+          },
+          "urls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "description": "Public profile or content URLs."
+          }
+        },
+        "required": [
+          "query",
+          "urls"
+        ]
+      }
+    },
+    {
+      "publicId": "reddit/user-profile",
+      "name": "Reddit User Profile API",
+      "description": "Look up Reddit accounts by username and get karma, post and comment counts, account age and profile details.",
+      "method": "POST",
+      "path": "/v1/reddit/user-profile",
+      "payload": "payloads/user-profile.json",
+      "launchedAt": "2026-11-17",
+      "price": "0.5 credits ($0.0025) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.5,
+        "estimateResultCount": 1,
+        "estimateInputField": "usernames",
+        "emptyResultPolicy": "base_only"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/reddit/user-profile",
+      "landingUrl": "https://socq.ai/apis/reddit/user-profile",
+      "required": [
+        "usernames"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "usernames": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "description": "Reddit usernames, with or without the u/ prefix.",
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "usernames"
+        ],
+        "description": "Provide up to 100 Reddit usernames in usernames, with or without the u/ prefix. Each account returns one row with its karma, post and comment counts, account age and profile details."
+      }
+    },
+    {
+      "publicId": "reddit/user-posts",
+      "name": "Reddit User Posts API",
+      "description": "Collect the post history of a Reddit user, sorted by new, top or hot, with full text, score, comments and media.",
+      "method": "POST",
+      "path": "/v1/reddit/user-posts",
+      "payload": "payloads/user-posts.json",
+      "launchedAt": "2026-11-17",
+      "price": "0.5 credits ($0.0025) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.5,
+        "estimateResultCount": 25,
+        "emptyResultPolicy": "base_only"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/reddit/user-posts",
+      "landingUrl": "https://socq.ai/apis/reddit/user-posts",
+      "required": [
+        "username"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "results_limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000,
+            "default": 25
+          },
+          "sort_by": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "hot",
+              "new",
+              "top"
+            ],
+            "default": "new",
+            "description": "Order of the posts: new, top or hot."
+          },
+          "username": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Reddit username, with or without the u/ prefix."
+          }
+        },
+        "required": [
+          "username"
+        ],
+        "description": "Provide one Reddit username in username. sort_by orders the posts by new (default), top or hot. results_limit defaults to 25 and accepts integers from 1 to 1000."
+      }
+    },
+    {
+      "publicId": "reddit/user-comments",
+      "name": "Reddit User Comments API",
+      "description": "Collect the comment history of a Reddit user with score, time, comment link and the post each comment was left on.",
+      "method": "POST",
+      "path": "/v1/reddit/user-comments",
+      "payload": "payloads/user-comments.json",
+      "launchedAt": "2026-11-17",
+      "price": "0.3 credits ($0.0015) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.3,
+        "estimateResultCount": 100,
+        "emptyResultPolicy": "base_only"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/reddit/user-comments",
+      "landingUrl": "https://socq.ai/apis/reddit/user-comments",
+      "required": [
+        "username"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "results_limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000,
+            "default": 100
+          },
+          "sort_by": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "hot",
+              "new",
+              "top"
+            ],
+            "default": "new",
+            "description": "Order of the comments: new, top or hot."
+          },
+          "username": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Reddit username, with or without the u/ prefix."
+          }
+        },
+        "required": [
+          "username"
+        ],
+        "description": "Provide one Reddit username in username. sort_by orders the comments by new (default), top or hot. results_limit defaults to 100 and accepts integers from 1 to 1000. text holds a preview of up to 300 characters, url opens the full comment and post_id identifies the post it was left on."
+      }
+    },
+    {
+      "publicId": "reddit/user-active-subreddits",
+      "name": "Reddit User Active Subreddits API",
+      "description": "See the subreddits a Reddit user is active in, with member counts and community descriptions.",
+      "method": "POST",
+      "path": "/v1/reddit/user-active-subreddits",
+      "payload": "payloads/user-active-subreddits.json",
+      "launchedAt": "2026-11-17",
+      "price": "0.5 credits ($0.0025) per call",
+      "billing": {
+        "baseCredits": 0.5,
+        "mode": "fixed"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/reddit/user-active-subreddits",
+      "landingUrl": "https://socq.ai/apis/reddit/user-active-subreddits",
+      "required": [
+        "username"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "username": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Reddit username, with or without the u/ prefix."
+          }
+        },
+        "required": [
+          "username"
+        ],
+        "description": "Provide one Reddit username in username. Each row is a community the account has recently posted or commented in, with its member count and description."
+      }
+    },
+    {
+      "publicId": "reddit/popular-feed",
+      "name": "Reddit Popular Feed API",
+      "description": "Collect the posts trending on r/popular, sorted by hot, new, top or rising, with score, comments and media.",
+      "method": "POST",
+      "path": "/v1/reddit/popular-feed",
+      "payload": "payloads/popular-feed.json",
+      "launchedAt": "2026-11-17",
+      "price": "0.5 credits ($0.0025) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.5,
+        "estimateResultCount": 25,
+        "emptyResultPolicy": "base_only"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/reddit/popular-feed",
+      "landingUrl": "https://socq.ai/apis/reddit/popular-feed",
+      "required": [],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "published_within": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "all",
+              "day",
+              "hour",
+              "month",
+              "week",
+              "year"
+            ],
+            "default": "day",
+            "description": "Time window used when sort_by is top: hour, day (default), week, month, year or all."
+          },
+          "results_limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 500,
+            "default": 25
+          },
+          "sort_by": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "best",
+              "hot",
+              "new",
+              "rising",
+              "top"
+            ],
+            "default": "hot",
+            "description": "Order of the feed: best, hot (default), new, top or rising."
+          }
+        },
+        "required": [],
+        "description": "All fields are optional. sort_by picks how r/popular is ordered and published_within sets the window for top. results_limit defaults to 25 and accepts integers from 1 to 500."
+      }
+    },
+    {
+      "publicId": "reddit/trending-searches",
+      "name": "Reddit Trending Searches API",
+      "description": "Get the searches trending on Reddit today, ranked in the order Reddit shows them.",
+      "method": "POST",
+      "path": "/v1/reddit/trending-searches",
+      "payload": "payloads/trending-searches.json",
+      "launchedAt": "2026-11-17",
+      "price": "0.5 credits ($0.0025) per call",
+      "billing": {
+        "baseCredits": 0.5,
+        "mode": "fixed"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/reddit/trending-searches",
+      "landingUrl": "https://socq.ai/apis/reddit/trending-searches",
+      "required": [],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "required": [],
+        "description": "No input is needed. Each call returns the searches trending on Reddit today, in the order Reddit shows them."
+      }
+    },
+    {
+      "publicId": "reddit/subreddit-rules",
+      "name": "Reddit Subreddit Rules API",
+      "description": "Get the numbered posting rules of subreddits, each with its short title and full rule text.",
+      "method": "POST",
+      "path": "/v1/reddit/subreddit-rules",
+      "payload": "payloads/subreddit-rules.json",
+      "launchedAt": "2026-11-17",
+      "price": "0.5 credits ($0.0025) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.5,
+        "estimateResultCount": 1,
+        "estimateInputField": "urls",
+        "emptyResultPolicy": "base_only"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/reddit/subreddit-rules",
+      "landingUrl": "https://socq.ai/apis/reddit/subreddit-rules",
+      "required": [
+        "urls"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "urls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "description": "Public profile or content URLs."
+          }
+        },
+        "required": [
+          "urls"
+        ],
+        "description": "Provide subreddit URLs in urls, such as https://www.reddit.com/r/AskReddit/. Each subreddit returns one row with its numbered rules, each with a short title and the full rule text."
+      }
+    }
+  ]
+}
